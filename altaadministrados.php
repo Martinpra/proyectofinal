@@ -384,33 +384,29 @@ Dni <br />
     <input type="text" name="apellido" /><br />
   telefono: <br />
     <input type="text" name="correo" /><br />
-    correo: <br />
-    <input type="text" name="telefono" /><br />
-        tipo_usuario: <br />
+    tipo_usuario: <br />
         <select name="tipo_usuario"> 
         <?php
-        $datos = "SELECT * FROM usuarios";
+        $datos = "SELECT * FROM usuario, categoria where usuario.categoria_idcategoria = categoria.idcategoria";
         $usuario1 = $base->query($datos);
          while ($fila=$usuario1->fetch_array()){ 
                              
-           echo "<option value = '".$fila['idusuarios']."'>".$fila['categoria']." ".$fila['tipo_cat']."</option>";
+           echo "<option value = '".$fila['idusuario']."'>".$fila['correo']." -- ".$fila['tipo_cat']."</option>";
         }
         ?>
         </select>
         <br />
-    password: <br />
-    <input type="text" name="password" /><br />
-    <input type="submit" value="Cargar Administrador" />   
+      <input type="submit" value="Cargar Administrador" />   
     <input type="submit" value="listado de Administradores" />  
 </form>
 <?php
 include ('clase_adminitrador.php'); 
-//include('BaseDeDatosmysqli.php');
+include('BaseDeDatosmysqli.php');
 $base = new BaseDeDatosmysqli("localhost","root","","mydb");
 $administrador1 = new Administrador($base);
 
 if (isset($_POST['dni_admin'])){	
-	$administrador1->insertar_admin($_POST['dni_admin'],$_POST['nombre'],$_POST['apellido'],$_POST['telefono'],$_POST['correo'], $_POST['tipo_usuario'], $_POST['password']);
+	$administrador1->insertar_admin($_POST['dni_admin'],$_POST['nombre'],$_POST['apellido'],$_POST['telefono'], $_POST['tipo_usuario']);
 	unset ($_POST);
 	?>
 <!--	<script type="text/javascript">

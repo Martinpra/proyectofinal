@@ -426,15 +426,15 @@
 function pagination(page)
 {
 window.location =
-"listado_docente.php?search_text="+document.form1.search_text.value+"&starting="+page;
+"listado_administradores.php?search_text="+document.form1.search_text.value+"&starting="+page;
 }
 </script>
 <?php
 //qry a modificar segun tabla que queremos consultar
-$qry = "SELECT dnidocente, apellido, nombre, correo, tipo_cat FROM docente, usuario, categoria where docente.usuarios_idusuarios = usuario.idusuario and usuario.categoria_idcategoria = categoria.idcategoria";
+$qry = "SELECT dni_admin, apellido, nombre, correo, tipo_cat FROM administrador, usuario, categoria where administrador. usuarios_idusuarios = usuario.idusuario and usuario.categoria_idcategoria = categoria.idcategoria";
 if(isset($_REQUEST['search_text'])){
 $searchText = $_REQUEST['search_text'];
-$qry .="where dnidocente like '$searchText%' OR apellido like '$searchText%'";
+$qry .="where dni_admin like '$searchText%' OR apellido like '$searchText%'";
 }
 else{
 $searchText = '';
@@ -449,7 +449,7 @@ $recpage = 10;//number of records per page
 $obj = new Pagination_class($qry,$base,$starting,$recpage);
 $result = $obj->result;
 ?>
-<form name="form1" action="listado_docente.php" method="POST">
+<form name="form1" action="listado_administadores.php" method="POST">
 <table border="1" width="40%">
 <tr>
  <td colspan="6">
@@ -457,13 +457,13 @@ Search <input type="text" name="search_text" value="<?php echo $searchText;?>">
 <input type="submit" value="Search">
  </td>
 </tr>
-<tr><td>Nro.</td><td>dni_docente</td><td>nombre</td><td>apellido</td><td>correo</td><td>tipo_cat</td><td>operaciones</td><td>operaciones</td></tr>
+<tr><td>Nro.</td><td>dni_admin</td><td>nombre</td><td>apellido</td><td>correo</td><td>tipo_cat</td><td>operaciones</td><td>operaciones</td></tr>
 <?php if(mysqli_num_rows($result)!=0){
     $counter = $starting + 1;
     while($data = mysqli_fetch_array($result)) {?>
     <tr>
     <td><?php echo $counter; ?></td>
-    <td><?php echo $data['dnidocente']; ?></td>
+    <td><?php echo $data['dni_admin']; ?></td>
     <td><?php echo $data['nombre']; ?></td>
     <td><?php echo $data['apellido']; ?></td>
     <td><?php echo $data['correo']; ?></td>

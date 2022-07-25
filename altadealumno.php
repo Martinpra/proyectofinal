@@ -392,11 +392,11 @@ Dni <br />
         tipo_usuario: <br />
         <select name="tipo_usuario"> 
         <?php
-        $datos = "SELECT * FROM usuarios";
+        $datos = "SELECT * FROM usuario, categoria where usuario.categoria_idcategoria = categoria.idcategoria";
         $usuario1 = $base->query($datos);
          while ($fila=$usuario1->fetch_array()){ 
                              
-           echo "<option value = '".$fila['idusuarios']."'>".$fila['categoria']." ".$fila['tipo_cat']."</option>";
+           echo "<option value = '".$fila['idusuario']."'>".$fila['correo']." -- ".$fila['tipo_cat']."</option>";
         }
         ?>
         </select>

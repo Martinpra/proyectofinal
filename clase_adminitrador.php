@@ -14,8 +14,8 @@ public function __destruct() {
 
 
 
-public function insertar_admin($dni_admin, $nombre, $apellido, $correo, $telefono, $tipo_usuario, $password){
-   $this->db->enviarQuery("INSERT INTO administrador VALUES ('$dni_admin', '$nombre', '$apellido', $correo, $telefono, $tipo_usuario, $password)");
+public function insertar_admin($dni_admin, $nombre, $apellido, $telefono, $tipo_usuario){
+   $this->db->enviarQuery("INSERT INTO administrador VALUES ('$dni_admin', '$nombre', '$apellido', '$telefono', '$tipo_usuario')");
     }
 
 
